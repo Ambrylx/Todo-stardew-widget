@@ -1,0 +1,85 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <style>
+    body {
+      background: transparent;
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      color: #4D4039;
+      font-size: 20px;
+      padding: 20px;
+    }
+
+    .todo-list { /*boite pointillé*/
+      background-color: rgba(255, 255, 255, 0);
+      border: 2px dashed #C5B4DE;
+      border-radius: 20px;
+      padding: 20px;
+      width: 350px;
+      height: 160px;
+    }
+
+    h2 { /*titre*/
+      text-align: center;
+      color: #C5B4DE;
+      font-size: 20px;
+      margin: 0 0 16px 0; /* supprime la marge du haut */
+    }
+
+    .item { /*chaque ligne*/
+      display: flex;
+      align-items: center;
+      margin-bottom: 6px;
+      transition: transform 0.2s ease;
+    }
+
+    .item.pop { /*animation*/
+      animation: pop 0.3s ease;
+    }
+
+    @keyframes pop { /*animation*/
+      0% { transform: scale(1); }
+      50% { transform: scale(1.2); }
+      100% { transform: scale(1); }
+    }
+
+    .item input[type="checkbox"] { /*checkbox*/
+      transform: scale(1.5);
+      margin-right: 10px;
+      accent-color: #4D4039;
+    }
+
+    .item label {
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="todo-list">
+    <h2>🌼 Objectifs Stardew Valley 🌼</h2>
+    <div class="item">
+      <input type="checkbox" id="task1" onclick="popItem(this)">
+      <label for="task1">Finir la quête "matériaux de construction" du CC</label>
+    </div>
+    <div class="item">
+      <input type="checkbox" id="task2" onclick="popItem(this)">
+      <label for="task2">Améliorer la pioche</label>
+    </div>
+    <div class="item">
+      <input type="checkbox" id="task3" onclick="popItem(this)">
+      <label for="task3">Amélioration la relation avec Sam</label>
+    </div>
+  </div>
+
+  <script>
+    function popItem(checkbox) {
+      const item = checkbox.parentElement;
+      item.classList.remove('pop'); // reset animation
+      void item.offsetWidth; // trigger reflow
+      item.classList.add('pop');
+    }
+  </script>
+</body>
+</html>
