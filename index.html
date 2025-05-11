@@ -60,27 +60,18 @@
   <div class="todo-list">
     <h2>🌼 Objectifs Stardew Valley 🌼</h2>
     <div class="item">
-      <input type="checkbox" id="task1" onclick="popItem(this)">
+      <input type="checkbox" id="task1" onclick="updateTaskStatus(this)">
       <label for="task1">Finir la quête "matériaux de construction" du CC</label>
     </div>
     <div class="item">
-      <input type="checkbox" id="task2" onclick="popItem(this)">
+      <input type="checkbox" id="task2" onclick="updateTaskStatus(this)">
       <label for="task2">Améliorer la pioche</label>
     </div>
     <div class="item">
-      <input type="checkbox" id="task3" onclick="popItem(this)">
+      <input type="checkbox" id="task3" onclick="updateTaskStatus(this)">
       <label for="task3">Amélioration la relation avec Sam</label>
     </div>
   </div>
-
-  <script>
-    function popItem(checkbox) {
-      const item = checkbox.parentElement;
-      item.classList.remove('pop'); // reset animation
-      void item.offsetWidth; // trigger reflow
-      item.classList.add('pop');
-    }
-  </script>
 
  <!-- Firebase SDK -->
   <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
