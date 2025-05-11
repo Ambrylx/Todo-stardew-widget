@@ -13,7 +13,7 @@
     }
 
     .todo-list { /*boite pointillé*/
-      background-color: rgba(255, 255, 255, 0);
+      background-color: rgba(255, 255, 255, 0.1);
       border: 2px dashed #C5B4DE;
       border-radius: 20px;
       padding: 20px;
@@ -80,6 +80,62 @@
       void item.offsetWidth; // trigger reflow
       item.classList.add('pop');
     }
+  </script>
+
+ <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js"></script>
+  
+  <script>
+    // Configuration Firebase
+    const firebaseConfig = {
+      apiKey: "AIzaSyC74rrVW-UV1qUWWp6UGmAKvPCsLKhbgz4",
+      authDomain: "todo-stardew-widget.firebaseapp.com",
+      databaseURL: "https://todo-stardew-widget-default-rtdb.europe-west1.firebasedatabase.app",
+      projectId: "todo-stardew-widget",
+      storageBucket: "todo-stardew-widget.firebasestorage.app",
+      messagingSenderId: "37006763001",
+      appId: "1:37006763001:web:602033afe90001a0c35328"
+    };
+
+    // Initialiser Firebase
+    const app = firebase.initializeApp(firebaseConfig);
+    const database = firebase.database();
+
+    // Fonction pour mettre à jour le statut de la tâche dans Firebase
+    function updateTaskStatus(checkbox) {
+      const taskId = checkbox.id;
+      const taskChecked = checkbox.checked;
+
+      // Mise à jour du statut de la tâche dans la base de données Firebase
+      database.ref('tasks/' + taskId).set({
+        checked: taskChecked
+      });
+
+      // Animation
+      const item = checkbox.parentElement;
+      item.classList.remove('pop'); // reset animation
+      void item.offsetWidth; // trigger reflow
+      item.classList.add('pop');
+    }
+
+    // Fonction pour charger l'état initial des tâches depuis Firebase
+    function loadTaskStates() {
+      const tasksRef = database.ref('tasks');
+      tasksRef.on('value', (snapshot) => {
+        const tasks = snapshot.val();
+        for (const taskId in tasks) {
+          const task = tasks[taskId];
+          const checkbox = document.getElementById(taskId);
+          if (checkbox) {
+            checkbox.checked = task.checked;
+          }
+        }
+      });
+    }
+
+    // Charger l'état initial des tâches au chargement de la page
+    loadTaskStates();
   </script>
 </body>
 </html>
