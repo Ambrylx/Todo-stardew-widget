@@ -55,7 +55,12 @@
       cursor: pointer;
     }
   </style>
+
+<!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js"></script>
 </head>
+
 <body>
   <div class="todo-list">
     <h2>🌼 Objectifs Stardew Valley 🌼</h2>
@@ -73,9 +78,6 @@
     </div>
   </div>
 
- <!-- Firebase SDK -->
-  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js"></script>
   
   <script>
     // Configuration Firebase
@@ -126,7 +128,7 @@
     }
 
     // Charger l'état initial des tâches au chargement de la page
-    loadTaskStates();
+    window.onload = loadTaskStates;
   </script>
 </body>
 </html>
